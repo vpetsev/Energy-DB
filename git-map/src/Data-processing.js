@@ -122,48 +122,48 @@ export const wells = data.map((obj) => {
   let wellType, wellCategory, color;
 
   if (oilWells.includes(symbDesc)) {
-      wellCategory = "oil"
-      wellType = symbDesc;
-      // green
-      color = [0, 255, 0];
+    wellCategory = "oil";
+    wellType = symbDesc;
+    // green
+    color = { hex: "#00ff00", rgb: [0, 255, 0] };
     oilWellsArr.push(obj);
   } else if (gasWells.includes(symbDesc)) {
-      wellCategory = "gas"
-      wellType = symbDesc;
-      gasWellsArr.push(obj);
-      //red
-      color = [255, 0, 0]
+    wellCategory = "gas";
+    wellType = symbDesc;
+    gasWellsArr.push(obj);
+    //red
+    color = { hex: "#ff0000", rgb: [255, 0, 0] };
   } else if (oilAndGasWells.includes(symbDesc)) {
-      wellCategory = "oilAndGas"
-      wellType = symbDesc;
-      oilAndGasWellsArr.push(obj);
-      // Mix? Half green half red?
-      color = [255, 204, 153]
+    wellCategory = "oilAndGas";
+    wellType = symbDesc;
+    oilAndGasWellsArr.push(obj);
+    // Mix? Half green half red?
+    color = { hex: "#ffcc99", rgb: [255, 204, 153] };
   } else if (miscWells.includes(symbDesc)) {
-      wellCategory = "misc"
-      wellType = symbDesc;
-      miscWellsArr.push(obj);
-      // purple
-      color = [33, 255, 248]
+    wellCategory = "misc";
+    wellType = symbDesc;
+    miscWellsArr.push(obj);
+    // purple
+    color = { hex: "#21ff99", rgb: [33, 255, 248] };
   } else if (inactiveWells.includes(symbDesc)) {
-      wellCategory = "inactive"
-      wellType = symbDesc;
-      inactiveWellsArr.push(obj);
-      //grey
-      color = [0, 255, 255]
+    wellCategory = "inactive";
+    wellType = symbDesc;
+    inactiveWellsArr.push(obj);
+    //grey
+    color = { hex: "#00ffff", rgb: [0, 255, 255] };
   } else {
     return symbDesc;
   }
 
   let wellObj = {
     coords: coords,
-      id: id,
+    id: id,
     color: color,
     attributes: {
       symbDesc: symbDesc,
       source: source,
       wellType: wellType,
-      wellCategory: wellCategory
+      wellCategory: wellCategory,
     },
     identifiers: {
       symbolNum: symbolNum,
@@ -187,6 +187,7 @@ export const wells = data.map((obj) => {
 
   return wellObj;
 });
+
 
 let dataLength = data.length;
 
