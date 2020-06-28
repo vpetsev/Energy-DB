@@ -1,5 +1,5 @@
 // / DATA PROCESSING ///
-import data from "./data"
+import data, { indexOf } from "./data"
 
 // Inactive is grey
 let inactiveWells = [
@@ -190,27 +190,32 @@ export const wells = data.map((obj) => {
 
 let dataLength = data.length;
 
-let oilWellsArrLength = oilWellsArr.length;
-let gasWellsArrLength = gasWellsArr.length;
-let oilAndGasWellsArrLength = oilAndGasWellsArr.length;
-let inactiveWellsArrLength = inactiveWellsArr.length;
-let miscWellsArrLength = miscWellsArr.length;
+let categoryTypes = ["oil", "gas", "oilAndGas", "inactive", "misc"];
+let colors = [[0, 255, 0], [255,0,0],[255, 204, 153], [33, 255, 248], [0, 255, 255]]
+
+// where to define colors and
 
 export let percentages = [];
 const getPercentage = (arr) => {
   let arrLength = arr.length;
   let percentage = (arrLength / dataLength) * 100;
+    
   percentages.push(percentage);
   return percentage;
 };
 
-
-
-wellCategoriesArr.forEach((category) => {
-  getPercentage(category);
+wellCategoriesArr.forEach((category, index) => {
+    let percentage = (category.length / dataLength * 100)
+    let type = categoryTypes[index]
+    let color = colors[index]
+    percentages.push({type: type, percentage: percentage, color: color})
 });
 
-
+// percentages.map(d => {
+//     console.log(d.color)
+//     console.log(d.percentage)
+//     console.log(d.type)
+// })
 // let descriptionArr = data.map(point => point.identifiers.symbDesc)
 // console.log(descriptionArr)
 

@@ -27,18 +27,7 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
 };
 
-let layerData = wells.map((obj) => {
-  return {
-    coords: obj.coords,
-    type: obj.attributes.wellType,
-    color: obj.color
-  }
-});
-
-
 // button to manage hexagon and scatter controls
-
-// Color the processed data into fractions in the processing file and use that, instead of the arrays of data
 
 class App extends React.Component {
   state = {
@@ -55,7 +44,7 @@ class App extends React.Component {
       }),
       {}
     ),
-    selectedHour: null,
+    selectedType: null,
     style: "mapbox://styles/mapbox/dark-v9",
   };
 
@@ -78,9 +67,31 @@ class App extends React.Component {
   }
 
   _onHover({ x, y, object }) {
-    const label = object ? object.apiNum : null;
+    const label = object
+      ? object.coords
+        ? "Test"
+        : "null"
+      : "null 2"
 
     this.setState({ hover: { x, y, hoveredObject: object, label } });
+  }
+
+  _onHighlight(highlightedType) {
+    this.setState({ highlightedType })
+  }
+
+  _onSelect(selectedType) {
+    this.setState({
+      selectedType:
+        selectedType === this.state.selectedType ?
+          null :
+          selectedType
+    })
+  }
+
+  _onWebGLInitialize = gl => {
+    gl.enable(gl.DEPTH_TEST)
+    gl.depthFunc(gl.LEQUAL)
   }
 
   _updateLayerSettings(settings) {
@@ -92,6 +103,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { viewState, controller = true } = this.props;
     const data = this.state.points
     if (!data.length) {
       return null;
@@ -117,8 +129,11 @@ class App extends React.Component {
           onChange={(settings) => this._updateLayerSettings(settings)}
           />
         <DeckGL
+          {...this.state.settings}
+          onWebGLInitialize={this._onWebGLInitialize}
           layers={renderLayers({
             data: this.state.points,
+            type: this.state.highlightedType || this.state.selectedType,
             onHover: (hover) => this._onHover(hover),
             settings: this.state.settings
           })}
@@ -130,7 +145,10 @@ class App extends React.Component {
             mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
           />
         </DeckGL>
-        <Charts />
+        <Charts {...this.state}
+          highlight={type => this._onHighlight(type)}
+          select={type => this._onSelect(type)}
+        />
       </div>
     );
   }
