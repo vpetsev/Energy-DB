@@ -121,4 +121,4 @@ data/
 .pnp.*
 
 .DS_Store
-
+full-data.js
