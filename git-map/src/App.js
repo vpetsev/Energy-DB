@@ -27,15 +27,6 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
 };
 
-let layerData = wells.map((obj) => {
-  return {
-    coords: obj.coords,
-    type: obj.attributes.wellType,
-    color: obj.color
-  }
-});
-
-
 // button to manage hexagon and scatter controls
 
 // Color the processed data into fractions in the processing file and use that, instead of the arrays of data
@@ -69,7 +60,7 @@ class App extends React.Component {
         coords: obj.coords,
         type: obj.attributes.wellType,
         color: obj.color,
-        apiNum: obj.apiNum
+        apiNum: obj.identifiers.apiNum
       };
     });
     this.setState({
@@ -92,6 +83,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { viewState, controller = true } = this.props;
     const data = this.state.points
     if (!data.length) {
       return null;
@@ -117,12 +109,15 @@ class App extends React.Component {
           onChange={(settings) => this._updateLayerSettings(settings)}
           />
         <DeckGL
+          {...this.state.settings}
+          propTypes={this.state.style}
           layers={renderLayers({
             data: this.state.points,
             onHover: (hover) => this._onHover(hover),
             settings: this.state.settings
           })}
           initialViewState={INITIAL_VIEW_STATE}
+          viewState={viewState}
           controller={true}
         >
           <StaticMap
@@ -130,7 +125,10 @@ class App extends React.Component {
             mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
           />
         </DeckGL>
-        <Charts />
+        <Charts {...this.state}
+          highlight={type => this._onHighlight(type)}
+          select={type => this._onSelect(type)}
+        />
       </div>
     );
   }
