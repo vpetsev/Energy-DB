@@ -1426,6 +1426,7 @@ const data = [
 //   SHAPE_Y: String,
 // };
 
+
 // const wells = data.map((obj) => {
 //   let coordsArr = obj.WKT
 //     .replace(/([A-Za-z\(\)])/gm, "")
@@ -1486,10 +1487,3 @@ const data = [
 // })
 
 module.exports = data
-// module.exports = dataRows.map((r) =>
-//   r.split(",").reduce((prev, curr, i) => {
-//     const field = fields[i];
-//     prev[field] = format[field](curr);
-//     return prev;
-//   }, {})
-// );

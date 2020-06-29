@@ -45,7 +45,6 @@ export const HEXAGON_CONTROLS = {
     max: 200,
   },
 };
-
 export const SCATTERPLOT_CONTROLS = {
   showScatterplot: {
     displayName: "Show Scatterplot",
