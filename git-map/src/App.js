@@ -30,7 +30,7 @@ const INITIAL_VIEW_STATE = {
 
 // button to manage hexagon and scatter controls
 
-class App extends Component {
+export default class App extends Component {
   state = {
     hover: {
       x: 0,
@@ -163,4 +163,3 @@ class App extends Component {
   }
 }
 
-export default App;

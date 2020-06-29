@@ -21,44 +21,61 @@ export const chartsStyle = {
   opacity: 0.8
 };
 
-export default function Charts(props) {
+export default function Charts({
+  highlight,
+  highlightedType,
+  points,
+  select,
+  selectedType
+}) {
+  if (!points) {
+    return (<div style={chartsStyle} />)
+  }
+  const data = points.map(d => {
+    return (
+    [
+      {
+        angle: 1,
+        color: d.color,
+        name: d.type,
+      },
+      {
+        angle: 1,
+        color: d.color,
+        name: d.type,
+      },
+      {
+        angle: 1,
+        color: d.color,
+        name: d.type,
+      },
+      {
+        angle: 1,
+        color: d.color,
+        name: d.type,
+      },
+      {
+        angle: 1,
+        color: d.color,
+        name: d.type,
+      }
+    ])
+  })
+
+  console.log(data)
   return (
     <div
       style={chartsStyle}
       // onMouseLeave={() => highlight(null)}
     >
-      <h2>Types of wells</h2>
-      <p> As percentage of all wells</p>
+      <div>
+        <h2>Types of wells</h2>
+        <p> As percentage of all wells</p>
+      </div>
       <RadialChart
         colorType={"literal"}
         getLabel={(d) => d.name}
-        data={[
-          {
-            angle: percentages[0].percentage,
-            color: percentages[0].color,
-            name: percentages[0].type
-          },
-          {
-            angle: percentages[1].percentage,
-            color: percentages[1].color,
-            name: percentages[1].type
-          },
-          {
-            angle: percentages[2].percentage,
-            color: percentages[2].color,
-            name: percentages[2].type
-          },
-          {
-            angle: percentages[3].percentage,
-            color: percentages[3].color,
-            name: percentages[3].type
-          },
-          {
-            angle: percentages[4].percentage,
-            color: percentages[4].color,
-            name: percentages[4].type
-          }
-        ]}
+        data={data}
         labelsRadiusMultiplier={1.1}
         labelsStyle={{ fontSize: 16, fill: "#222" }}
         showLabels
