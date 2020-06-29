@@ -123,3 +123,4 @@ data/
 .DS_Store
 full-data.js
 working-app-scatter.js
+texas-well-locations.csv
