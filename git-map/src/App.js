@@ -9,6 +9,7 @@ import { wells, percentages } from './Data-processing';
 import { renderLayers } from './ScatterplotLayer';
 import { SCATTERPLOT_CONTROLS, HEXAGON_CONTROLS, MapStylePicker, LayerControls } from "./Controls"
 import { tooltipStyle } from './Style';
+import "./App.css"
 
 
 // order 
@@ -53,12 +54,12 @@ class App extends Component {
   }
 
   _processData = () => {
+    // Point defined here with Coordinates, type, and color as attributes.
     let points = wells.map((obj) => {
       return {
         coords: obj.coords,
         type: obj.attributes.wellType,
-        color: obj.color,
-        apiNum: obj.apiNum
+        color: obj.color
       };
     });
     this.setState({
@@ -66,13 +67,21 @@ class App extends Component {
     })
   }
 
+  // adjust the tooltip box styling
   _onHover({ x, y, object }) {
     const label = object
       ? object.coords
-        ? "Test"
-        : "null"
-      : "null 2"
-
+        ? `( Lat: ${object.coords[1].toFixed(4)},
+             Long: ${object.coords[0].toFixed(4)}
+            )
+          Type: ${object.type}`
+        : null
+      : "null 2";
+    // object.length > 4 
+    // ? larger
+    // ? object.length(length of obj)
+    // : object 
+    // ? ""
     this.setState({ hover: { x, y, hoveredObject: object, label } });
   }
 
