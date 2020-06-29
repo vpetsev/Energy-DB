@@ -17,7 +17,8 @@ export const chartsStyle = {
   bottom: 20,
   width: 500,
   zIndex: 100,
-  display: "flex"
+  display: "flex",
+  opacity: 0.8
 };
 
 export default function Charts(props) {

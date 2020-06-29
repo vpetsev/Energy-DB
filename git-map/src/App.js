@@ -1,8 +1,8 @@
 /// app.js
-import React from 'react';
+import React, { Component } from 'react';
 import DeckGL from '@deck.gl/react';
-import { ScatterplotLayer } from '@deck.gl/layers';
 import { StaticMap } from 'react-map-gl'
+import { ScatterplotLayer } from '@deck.gl/layers';
 import { Controller } from "@deck.gl/core"
 import Charts from "./Charts" 
 import { wells, percentages } from './Data-processing';
@@ -29,7 +29,7 @@ const INITIAL_VIEW_STATE = {
 
 // button to manage hexagon and scatter controls
 
-class App extends React.Component {
+class App extends Component {
   state = {
     hover: {
       x: 0,

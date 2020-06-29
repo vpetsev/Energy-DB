@@ -192,7 +192,7 @@ export const wells = data.map((obj) => {
 let dataLength = data.length;
 
 let categoryTypes = ["oil", "gas", "oilAndGas", "inactive", "misc"];
-let colors = [[0, 255, 0], [255,0,0],[255, 204, 153], [33, 255, 248], [0, 255, 255]]
+let colors = ["#00ff00", "#ff0000", "#ffcc99", "#21ff99", "#00ffff"];
 
 // where to define colors and
 
