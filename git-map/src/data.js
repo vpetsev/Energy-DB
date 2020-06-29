@@ -1426,70 +1426,64 @@ const data = [
 //   SHAPE_Y: String,
 // };
 
-const wells = data.map((obj) => {
-  let coordsArr = obj.WKT
-    .replace(/([A-Za-z\(\)])/gm, "")
-    .trim()
-    .split(" ")
-    .join(", ")
-  .split(", ")
-  let wellNum = obj.GIS_WELL_NUMBER // Sometimes there are non-numbers
-  let symbolNum = Number(obj.SYMNUM)
-  let reliab = Number(obj.RELIAB)
-  let apiNum = Number(obj.API)
-  let long83 = Number(obj.GIS_LONG83)
-  let lat83 = Number(obj.GIS_LAT83)
-  let lat27 = Number(obj.GIS_LAT27)
-  let long27 = Number(obj.GIS_LONG27)
-  let id = Number(obj.UNIQID)
-  let shapeX = Number(obj.SHAPE_X)
-  let shapeY = Number(obj.SHAPE_Y)
-  let type = obj.GIS_SYMBOL_DESCRIPTION
-  let source = obj.GIS_LOCATION_SOURCE
-  let symDesc = obj.GIS_SYMBOL_DESCRIPTION
 
-  let gisApi;
-  if (obj.GIS_API5 !== " ") {
-    gisApi = parseFloat(obj.GIS_API5);
-  } else {
-    gisApi = 0;
-  }
+// const wells = data.map((obj) => {
+//   let coordsArr = obj.WKT
+//     .replace(/([A-Za-z\(\)])/gm, "")
+//     .trim()
+//     .split(" ")
+//     .join(", ")
+//   .split(", ")
+//   let wellNum = obj.GIS_WELL_NUMBER // Sometimes there are non-numbers
+//   let symbolNum = Number(obj.SYMNUM)
+//   let reliab = Number(obj.RELIAB)
+//   let apiNum = Number(obj.API)
+//   let long83 = Number(obj.GIS_LONG83)
+//   let lat83 = Number(obj.GIS_LAT83)
+//   let lat27 = Number(obj.GIS_LAT27)
+//   let long27 = Number(obj.GIS_LONG27)
+//   let id = Number(obj.UNIQID)
+//   let shapeX = Number(obj.SHAPE_X)
+//   let shapeY = Number(obj.SHAPE_Y)
+//   let type = obj.GIS_SYMBOL_DESCRIPTION
+//   let source = obj.GIS_LOCATION_SOURCE
+//   let symDesc = obj.GIS_SYMBOL_DESCRIPTION
 
-  let coords = coordsArr.map((el) => Number(el))
+//   let gisApi;
+//   if (obj.GIS_API5 !== " ") {
+//     gisApi = parseFloat(obj.GIS_API5);
+//   } else {
+//     gisApi = 0;
+//   }
 
-  return {
-    coords: coords,
-    id: id,
-    attributes: {
-      type: type,
-      source: source,
-    },
-    identifiers: {
-      symbolNum: symbolNum,
-      apiNum: apiNum,
-      wellNum: wellNum,
-      gisApi: gisApi,
-      reliab: reliab,
-      symDesc: symDesc
-    },
-    detailCoords: {
-      lat83: lat83,
-      long83: long83,
-      lat27: lat27,
-      long27: long27,
-    },
-    shape: {
-      shapeX,
-      shapeY,
-    },
-  };
-})
+//   let coords = coordsArr.map((el) => Number(el))
 
-module.exports = wells
-// module.exports = dataRows.map((r) =>
-//   r.split(",").reduce((prev, curr, i) => {
-//     const field = fields[i];
-//     prev[field] = format[field](curr);
-//     return prev;
-//   }, {})
-// );
+//   return {
+//     coords: coords,
+//     id: id,
+//     attributes: {
+//       type: type,
+//       source: source,
+//     },
+//     identifiers: {
+//       symbolNum: symbolNum,
+//       apiNum: apiNum,
+//       wellNum: wellNum,
+//       gisApi: gisApi,
+//       reliab: reliab,
+//       symDesc: symDesc
+//     },
+//     detailCoords: {
+//       lat83: lat83,
+//       long83: long83,
+//       lat27: lat27,
+//       long27: long27,
+//     },
+//     shape: {
+//       shapeX,
+//       shapeY,
+//     },
+//   };
+// })
+
+module.exports = data

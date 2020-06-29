@@ -1,4 +1,18 @@
 /// app.js
+import React, { Component } from 'react';
+import DeckGL from '@deck.gl/react';
+import { StaticMap } from 'react-map-gl'
+import { ScatterplotLayer } from '@deck.gl/layers';
+import { Controller } from "@deck.gl/core"
+import Charts from "./Charts" 
+import { wells, percentages } from './Data-processing';
+import { renderLayers } from './ScatterplotLayer';
+import { SCATTERPLOT_CONTROLS, HEXAGON_CONTROLS, MapStylePicker, LayerControls } from "./Controls"
+import { tooltipStyle } from './Style';
+
+
+// order 
+// oil, gas, oil+gas, inactive, misc
 import React from 'react';
 import DeckGL from '@deck.gl/react';
 import { ScatterplotLayer } from '@deck.gl/layers';
@@ -7,6 +21,7 @@ import { StaticMap } from 'react-map-gl'
 import { Controller } from "@deck.gl/core"
 
 console.log(Controller)
+
 
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoidnBldHNldjk2IiwiYSI6ImNrYnRzMTBxejAwZnYycXA3bzZ0OXFpdHUifQ.Dv0v0YoPuv-SNDoHUVoMmw";
@@ -21,72 +36,129 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
 };
 
-let layerData = wellsData.map(obj => obj.coords)
+// button to manage hexagon and scatter controls
 
-// let descriptionArr = wellsData.map(point => point.identifiers.symDesc)
-// console.log(descriptionArr)
+class App extends Component {
+  state = {
+    hover: {
+      x: 0,
+      y: 0,
+      hoveredObject: null,
+    },
+    points: [],
+    settings: Object.keys(SCATTERPLOT_CONTROLS).reduce(
+      (accu, key) => ({
+        ...accu,
+        [key]: SCATTERPLOT_CONTROLS[key].value,
+      }),
+      {}
+    ),
+    selectedType: null,
+    style: "mapbox://styles/mapbox/dark-v9",
+  };
 
-// let descs = [...new Set(descriptionArr)]
-// console.log(descs)
+  componentDidMount() {
+    this._processData()
+  }
 
-let typesOfWells = [
-  "Gas Well",
-  "Dry Hole",
-  "Plugged Gas Well",
-  "Permitted Location",
-  "Plugged Oil Well",
-  "Oil Well",
-  "Oil/Gas Well",
-  "Plugged Oil / Gas",
-  "Injection / Disposal",
-  "Canceled / Abandoned Location",
-  "Plugged Storage",
-  "Shut-In Gas",
-  "Injection / Disposal from Oil",
-  "Shut-In Oil",
-  "Injection / Disposal from Gas",
-  "Observation Well",
-  "Water Supply Well",
-  "Injection / Disposal from Oil/Gas",
-  "Observation from Oil"
-];
+  _processData = () => {
+    let points = wells.map((obj) => {
+      return {
+        coords: obj.coords,
+        type: obj.attributes.wellType,
+        color: obj.color,
+        apiNum: obj.apiNum
+      };
+    });
+    this.setState({
+      points
+    })
+  }
 
-class App extends React.Component {
-  _renderLayers() {
-    const {
-      data = layerData,
-      radius = 10
-    } = this.props
-    
-    return [
-      new ScatterplotLayer({
-        id: 'scatter-plot',
-        data,
-        radiusScale: radius,
-        radiusMinPixels: 5,
-        getPosition: d => [d[0], d[1], 0],
-        getFillColor: d => [244, 244, 0],
-        getRadius: 1,
+  _onHover({ x, y, object }) {
+    const label = object
+      ? object.coords
+        ? "Test"
+        : "null"
+      : "null 2"
 
-      })
-    ]
-  
+    this.setState({ hover: { x, y, hoveredObject: object, label } });
+  }
+
+  _onHighlight(highlightedType) {
+    this.setState({ highlightedType })
+  }
+
+  _onSelect(selectedType) {
+    this.setState({
+      selectedType:
+        selectedType === this.state.selectedType ?
+          null :
+          selectedType
+    })
+  }
+
+  _onWebGLInitialize = gl => {
+    gl.enable(gl.DEPTH_TEST)
+    gl.depthFunc(gl.LEQUAL)
+  }
+
+  _updateLayerSettings(settings) {
+    this.setState({ settings });
+  }
+
+  onStyleChange = style => {
+    this.setState({ style })
   }
 
   render() {
-    const {mapStyle = 'mapbox://styles/mapbox/dark-v9'} = this.props
-
+    const { viewState, controller = true } = this.props;
+    const data = this.state.points
+    if (!data.length) {
+      return null;
+    }
+    const { hover, settings } = this.state;
     return (
+      <div>
+        {hover.hoveredObject && (
+          <div style={{
+            ...tooltipStyle,
+            transform: `translate(${hover.x}px, ${hover.y}px)`,
+          }}
+          ><div>{hover.label}</div>
+          </div>
+        )}
+        <MapStylePicker
+          onStyleChange={this.onStyleChange}
+          currentStyle={this.state.style}
+        />
+        <LayerControls
+          settings={this.state.settings}
+          propTypes={SCATTERPLOT_CONTROLS}
+          onChange={(settings) => this._updateLayerSettings(settings)}
+          />
         <DeckGL
-          layers={this._renderLayers()}
+          {...this.state.settings}
+          onWebGLInitialize={this._onWebGLInitialize}
+          layers={renderLayers({
+            data: this.state.points,
+            type: this.state.highlightedType || this.state.selectedType,
+            onHover: (hover) => this._onHover(hover),
+            settings: this.state.settings
+          })}
           initialViewState={INITIAL_VIEW_STATE}
           controller={true}
         >
           <StaticMap
-            mapStyle={mapStyle}
+            mapStyle={this.state.style}
             mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
           />
         </DeckGL>
+        <Charts {...this.state}
+          highlight={type => this._onHighlight(type)}
+          select={type => this._onSelect(type)}
+        />
+      </div>
     );
   }
 }
