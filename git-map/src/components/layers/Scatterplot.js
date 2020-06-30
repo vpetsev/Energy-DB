@@ -1,7 +1,6 @@
 import { ScatterplotLayer } from 'deck.gl';
-import { wells, percentages } from "./Data-processing";
 
-export function renderLayers(props) {
+export function scatterLayer(props) {
     const {
         data,
         onHover,
@@ -9,7 +8,6 @@ export function renderLayers(props) {
     } = props
     
     return [
-    settings.showScatterplot &&
       new ScatterplotLayer({
         id: 'scatter-plot',
         getPosition: d => [d.coords[0], d.coords[1], 0],

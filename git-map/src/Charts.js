@@ -23,27 +23,28 @@ export const chartsStyle = {
 
 export default function charts(props) {
   return (
-    <RadialChart style={chartsStyle}
-      colorType={"literal"}
-      colorDomain={[0, 100]}
-      colorRange={[0, 10]}
-      margin={{ top: 100 }}
-      getLabel={(d) => d.name}
-      data={[
-        { angle: percentages[0], color: "#89DAC1", name: "green", opacity: 0.2 },
-        { angle: percentages[1], color: "#F6D18A", name: "yellow" },
-        { angle: percentages[2], color: "#1E96BE", name: "cyan" },
-        { angle: percentages[3], color: "#DA70BF", name: "magenta" },
-        { angle: percentages[4], color: "#F6D18A", name: "yellow again" },
-      ]}
-      labelsRadiusMultiplier={1.1}
-      labelsStyle={{ fontSize: 16, fill: "#222" }}
-      showLabels
-      style={{ stroke: "#fff", strokeWidth: 2 }}
-      width={400}
-      height={300}
-    />
+    <div style={chartsStyle}>
+      <RadialChart
+        style={{ stroke: "#fff", strokeWidth: 2, cursor: "pointer" }}
+        colorType={"literal"}
+        colorDomain={[0, 100]}
+        colorRange={[0, 10]}
+        margin={{ top: 100 }}
+        getLabel={(d) => d.name}
+        data={[
+          { angle: percentages[0], color: "#89DAC1", name: "green" },
+          { angle: percentages[1], color: "#F6D18A", name: "yellow" },
+          { angle: percentages[2], color: "#1E96BE", name: "cyan" },
+          { angle: percentages[3], color: "#DA70BF", name: "magenta" },
+          { angle: percentages[4], color: "#F6D18A", name: "yellow again" },
+        ]}
+        labelsRadiusMultiplier={1.1}
+        labelsStyle={{ fontSize: 16, fill: "#222" }}
+        showLabels
+        style={{ stroke: "#fff", strokeWidth: 2 }}
+        width={150}
+        height={150}
+      />
+    </div>
   );
 }
-
-// Use saved data from the arrays

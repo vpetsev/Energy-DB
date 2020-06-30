@@ -50,6 +50,7 @@ let miscWells = [
   "Plugged Storage",
   "Observation Well",
   "Water Supply Well",
+  "Plugged Brine Mining"
 ];
 
 let typesOfWells = [
@@ -210,6 +211,10 @@ wellCategoriesArr.forEach((category) => {
   getPercentage(category);
 });
 
+let descriptionArr = data.map((point) => point.GIS_SYMBOL_DESCRIPTION);
+
+let descs = [...new Set(descriptionArr)];
+console.log(descs.length)
 
 // let descriptionArr = data.map(point => point.identifiers.symbDesc)
 // console.log(descriptionArr)
