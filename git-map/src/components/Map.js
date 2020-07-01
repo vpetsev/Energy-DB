@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
+import { connect } from 'react-redux'
+import filterState from "./filter"
 import DeckGL from "@deck.gl/react";
 import { StaticMap } from "react-map-gl";
 import {
@@ -8,28 +10,21 @@ import {
     LayerControls,
 } from "../Controls";
 import { tooltipStyle } from "../Style";
-import { wells } from "../Data-processing";
+import { wells, wellsData } from "../data";
+import { viewStates as initialViewStates, categories } from "../config";
 
 import {scatterLayer} from "./layers/Scatterplot";
 import {hexLayer} from "./layers/Hexagon"
 
 // Can move viewstate to state
-const INITIAL_VIEW_STATE = {
-  longitude: -99.733147,
-  latitude: 32.448734,
-  zoom: 7,
-  minZoom: 2,
-  maxZoom: 16,
-  pitch: 10,
-  bearing: 0,
-};
+
 
 // Move to config
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoidnBldHNldjk2IiwiYSI6ImNrYnRzMTBxejAwZnYycXA3bzZ0OXFpdHUifQ.Dv0v0YoPuv-SNDoHUVoMmw";
 
 
-const Map = () => {
+const Map = ({ activeView, activeLayer, data, zoom }) => {
     let defaultStyle = "mapbox://styles/mapbox/dark-v9"
     let initialHoverObj = {
         hover: {
@@ -39,10 +34,10 @@ const Map = () => {
         }
     }
     let initialSettings =
-        Object.keys(HEXAGON_CONTROLS).reduce(
+        Object.keys(SCATTERPLOT_CONTROLS).reduce(
             (accu, key) => ({
                 ...accu,
-                [key]: HEXAGON_CONTROLS[key].value,
+                [key]: SCATTERPLOT_CONTROLS[key].value,
             })
         )
     
@@ -50,24 +45,7 @@ const Map = () => {
     const [hover, setHover] = useState(initialHoverObj);
     const [settings, setSettings] = useState(initialSettings);
     const [style, setStyle] = useState(defaultStyle);
-    const [data, setData] = useState([]);
-    
-    
-    useEffect(() => {
-        _processData()
-    }, [])
-    
-    const _processData = () => {
-        let data = wells.map((obj) => {
-            return {
-                coords: obj.coords,
-                type: obj.attributes.wellType,
-                color: obj.color,
-                apiNum: obj.apiNum                
-            }
-        })
-        setData(data)
-    }
+    const [viewStates, setViewStates] = useState(initialViewStates);
 
     const _onHover = ({ x, y, object }) => {
     const label = object
@@ -88,10 +66,24 @@ const Map = () => {
     const onStyleChange = style => {
         setStyle({style})
     }
+
+    const layers = [
+      activeLayer === "hexbins"
+        ? hexLayer({
+            data: wellsData,
+            categories: categories.map((c) => c.active),
+          })
+        : scatterLayer({
+            data: wellsData,
+            categories: categories.map((c) => c.active),
+          }),
+    ];
     
     if (!data.length) {
         return null;
     }
+
+
 
     return (
         <div className="map-container">
@@ -110,16 +102,16 @@ const Map = () => {
             />
             {/* <LayerControls
                 settings={settings}
-                propType={SCATTERPLOT_CONTROLS}
+                propType={HEXAGON_CONTROLS}
                 onChange={(settings) => this._updateLayerSettings(settings)}
             /> */}
             <DeckGL
-                layers={hexLayer({
+                layers={layers ? layers : scatterLayer({
                     data: data,
                     onHover: (hover) => _onHover(hover),
                     settings: settings
                 })}
-                initialViewState={INITIAL_VIEW_STATE}
+                initialViewState={viewStates[0]}
                 controller={true}
             >
                 <StaticMap
@@ -132,4 +124,6 @@ const Map = () => {
     )
 }
 
-export default Map;
+const mapStateToProps = (state) => filterState(state);
+const mapDispatchToProps = (dispatch) => ({ dispatch });
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

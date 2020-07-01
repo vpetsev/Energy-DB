@@ -106,7 +106,7 @@ export class LayerControls extends Component {
   _onValueChange(settingName, newValue) {
     const { settings } = this.props;
     // Only update if we have a confirmed change
-    if (settings[settingName] !== newValue) {
+    if (settings[settingName] != newValue) {
       // Create a new object so that shallow-equal detects a change
       const newSettings = {
         ...this.props.settings,
@@ -141,6 +141,13 @@ export class LayerControls extends Component {
     );
   }
 }
+
+// export const LayerControls = () => {
+//   _onValueChange(settingName, newValue) {
+
+//   }
+
+// }
 
 const Setting = (props) => {
   const { propType } = props;
