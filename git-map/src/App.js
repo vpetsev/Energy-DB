@@ -13,12 +13,7 @@ import { tooltipStyle } from './Style';
 
 // order 
 // oil, gas, oil+gas, inactive, misc
-import React from 'react';
-import DeckGL from '@deck.gl/react';
-import { ScatterplotLayer } from '@deck.gl/layers';
-import wellsData from "./data"
-import { StaticMap } from 'react-map-gl'
-import { Controller } from "@deck.gl/core"
+
 
 console.log(Controller)
 
