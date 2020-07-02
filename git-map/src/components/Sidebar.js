@@ -8,7 +8,7 @@ import { categories } from "../config"
 
 
 
-const Section = ({children }) => {
+const Section = ({ children }) => {
     return (
         <div
             style={{
@@ -16,7 +16,7 @@ const Section = ({children }) => {
                 padding: "15px 0"
             }}
         >
-            {children}
+            { children }
         </div>
     );
 };

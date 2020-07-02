@@ -42,6 +42,7 @@ export const CategoryList = ({ data, categories, handleClick, activeMetric }) =>
                         category.name.substring(1) + ":"}
                 </span>
                 {<span className="sub">{format + " Wells"}</span>}
+                <span className="legendColor" style={{ marginLeft: "30px", backgroundColor: `${category.hexColor}`}}>{`${category.hexColor}`}</span>
             </div>
         )
     })

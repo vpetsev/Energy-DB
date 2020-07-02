@@ -123,38 +123,43 @@ export const wells = wellsData.map((obj) => {
 
   // let wellType = () => {
   // }
-  let wellType, wellCategory, color;
+  let wellType, wellCategory, color, hexColor;
 
   if (oilWells.includes(symbDesc)) {
       wellCategory = "oil"
       wellType = symbDesc;
       // green
-      color = [0, 255, 0];
+    color = [0, 255, 0];
+    hexColor = "#00FF00";
     oilWellsArr.push(obj);
   } else if (gasWells.includes(symbDesc)) {
       wellCategory = "gas"
       wellType = symbDesc;
       gasWellsArr.push(obj);
       //red
-      color = [255, 0, 0]
+    color = [255, 0, 0]
+    hexColor = "#FF0000"
   } else if (oilAndGasWells.includes(symbDesc)) {
       wellCategory = "oilAndGas"
       wellType = symbDesc;
       oilAndGasWellsArr.push(obj);
-      // Mix? Half green half red?
+      // peach
       color = [255, 204, 153]
+      hexColor= "#FFCC99"
   } else if (miscWells.includes(symbDesc)) {
       wellCategory = "misc"
       wellType = symbDesc;
       miscWellsArr.push(obj);
       // purple
-      color = [0,0,255]
+    color = [0, 0, 255]
+    hexColor = "#0000FF"
   } else if (inactiveWells.includes(symbDesc)) {
       wellCategory = "inactive"
       wellType = symbDesc;
       inactiveWellsArr.push(obj);
       //grey
-      color = [0,0,0]
+    color = [191, 193, 194]
+    hexColor= "#BFC1C2"
   } else {
     return symbDesc;
   }
@@ -163,6 +168,7 @@ export const wells = wellsData.map((obj) => {
     coords: coords,
       id: id,
     color: color,
+    hexcolor: hexColor,
     attributes: {
       symbDesc: symbDesc,
       source: source,

@@ -1,25 +1,29 @@
 export const categories = [
     {
         name: "oil",
-        color:  [0, 255, 0],
+        color: [0, 255, 0],
+        hexColor: "#00FF00",
         modes: ['oil'],
         active: true
     },
     {
         name: "gas",
         color:  [255, 0, 0],
+        hexColor: "#FF0000",
         modes: ['gas'],
         active: true
     },
     {
         name: "oilAndGas",
-        color:  [255, 204, 153],
+        color: [255, 204, 153],
+        hexColor: "#FFCC99",
         modes: ['oilAndGas'],
         active: true
     },
     {
         name: "misc",
         color: [33, 255, 248],
+        hexColor: "#0000FF",
         modes: ['misc'],
         active: true
     },
@@ -27,7 +31,8 @@ export const categories = [
         name: "inactive",
         color: [0, 255, 255],
         modes: ['inactive'],
-        active: true
+        active: true,
+        hexColor: "#000000"
     }
 ]
 

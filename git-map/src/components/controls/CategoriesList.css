@@ -13,6 +13,7 @@
    box-sizing: border-box;
    position: relative;
    cursor: pointer;
+   justify-content: space-evenly;
 }
 
 .line {
@@ -22,16 +23,15 @@
    transition: .3s all ease-out;
 }
 
-.lyft {
-   color: black;
-   background: #FE00D8;
-   width: 25%;
-}
-
 .sub {
    color: #737373;
    margin-left: 10px;
    font-size: 12px;
+}
+
+.colorLegend {
+   text-align: end;
+   border: 1px solid black;
 }
 
 .title {

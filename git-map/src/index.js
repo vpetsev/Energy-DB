@@ -6,11 +6,22 @@ import { Provider } from 'react-redux'
 import { createStore } from "redux"
 import { viewStates, categories } from "./config";
 import { wells as data } from "./data"
+import { SCATTERPLOT_CONTROLS } from "./Controls"
 
 
 const initialState = {
   viewStates,
   data,
+  hover: {
+    x: 0,
+    y: 0,
+    hoveredObject: null
+  },
+  settings: Object.keys(SCATTERPLOT_CONTROLS).reduce(
+      (accu, key) => ({
+        ...accu,
+        [key]: SCATTERPLOT_CONTROLS[key].value,
+      })),
   categories: categories,
   activeLayer: 'scatter',
   activeMetric: 'wells',
