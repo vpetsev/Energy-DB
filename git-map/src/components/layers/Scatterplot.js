@@ -7,6 +7,8 @@ export function scatterLayer(props) {
         settings
     } = props
     
+    console.log(data)
+  
     return [
       new ScatterplotLayer({
         id: 'scatter-plot',

@@ -207,10 +207,18 @@ const getPercentage = (arr) => {
 
 console.log(wellCategoriesArr)
 
+
 wellCategoriesArr.forEach((category) => {
   getPercentage(category);
 });
 
+export let categoryLength = [
+  oilWellsArr.length,
+  gasWellsArr.length,
+  oilAndGasWellsArr.length,
+  inactiveWellsArr.length,
+  miscWellsArr.length,
+];
 
 // let descriptionArr = data.map(point => point.GIS_SYMBOL_DESCRIPTION)
 

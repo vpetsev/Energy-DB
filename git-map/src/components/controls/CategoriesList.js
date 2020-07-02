@@ -1,6 +1,7 @@
 import React from "react";
 import { percentages } from "../../data"
 // icons
+// use arrays from data
 
 const units = {
     wells: "wells",

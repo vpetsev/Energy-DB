@@ -23,95 +23,27 @@ import {hexLayer} from "./layers/Hexagon"
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoidnBldHNldjk2IiwiYSI6ImNrYnRzMTBxejAwZnYycXA3bzZ0OXFpdHUifQ.Dv0v0YoPuv-SNDoHUVoMmw";
 
+export const viewStates =
+{
+    longitude: -95.773046,
+    latitude: 30.049046,
+    zoom: 7,
+    minZoom: 2,
+    maxZoom: 16,
+    pitch: 10,
+    bearing: 0,
+}
 
-const Map = ({ activeView, activeLayer, data, zoom }) => {
-    let defaultStyle = "mapbox://styles/mapbox/dark-v9"
-    let initialHoverObj = {
-        hover: {
-            x: 0,
-            y: 0,
-            hoveredObject: null
-        }
-    }
-    let initialSettings =
-        Object.keys(SCATTERPLOT_CONTROLS).reduce(
-            (accu, key) => ({
-                ...accu,
-                [key]: SCATTERPLOT_CONTROLS[key].value,
-            })
-        )
-    
-    
-    const [hover, setHover] = useState(initialHoverObj);
-    const [settings, setSettings] = useState(initialSettings);
-    const [style, setStyle] = useState(defaultStyle);
-    const [viewStates, setViewStates] = useState(initialViewStates);
-
-    const _onHover = ({ x, y, object }) => {
-    const label = object
-        ? object.coords
-        ? `( Lat: ${object.coords[1].toFixed(4)},
-        Long: ${object.coords[0].toFixed(4)}
-    )
-    Type: ${object.type}`
-        : null
-        : "null 2";
-        setHover({hover: { x, y, hoveredObject: object, label } })
-    }
-
-    const _updateLayerSettings = (settings) => {
-        setSettings({ settings })
-    }
-
-    const onStyleChange = style => {
-        setStyle({style})
-    }
-
-    const layers = [
-      activeLayer === "hexbins"
-        ? hexLayer({
-            data: wellsData,
-            categories: categories.map((c) => c.active),
-          })
-        : scatterLayer({
-            data: wellsData,
-            categories: categories.map((c) => c.active),
-          }),
-    ];
-    
-    if (!data.length) {
-        return null;
-    }
-
+const Map = () => {
+    let style = "mapbox://styles/mapbox/dark-v9";
 
 
     return (
-        <div className="map-container">
-            {hover.hoveredObject && (
-                <div style={{
-                    ...tooltipStyle,
-                    transform: `translate(${hover.x}px, ${hover.y}px)`
-                }}
-                >
-                <div>{hover.label}</div>
-                </div>
-            )}
-            <MapStylePicker
-                onStyleChange={onStyleChange}
-                currentStyle={style}
-            />
-            {/* <LayerControls
-                settings={settings}
-                propType={HEXAGON_CONTROLS}
-                onChange={(settings) => this._updateLayerSettings(settings)}
-            /> */}
             <DeckGL
-                layers={layers ? layers : scatterLayer({
-                    data: data,
-                    onHover: (hover) => _onHover(hover),
-                    settings: settings
+                layers={scatterLayer({
+                    data: wells,
                 })}
-                initialViewState={viewStates[0]}
+                initialViewState={viewStates}
                 controller={true}
             >
                 <StaticMap
@@ -119,8 +51,6 @@ const Map = ({ activeView, activeLayer, data, zoom }) => {
                     mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
                 />
             </DeckGL>
-        </div>
-
     )
 }
 
