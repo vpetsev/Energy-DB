@@ -1,4 +1,5 @@
 /// app.js
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl'
@@ -9,6 +10,11 @@ import { wells, percentages } from './Data-processing';
 import { renderLayers } from './ScatterplotLayer';
 import { SCATTERPLOT_CONTROLS, HEXAGON_CONTROLS, MapStylePicker, LayerControls } from "./Controls"
 import { tooltipStyle } from './Style';
+=======
+import React from 'react';
+import Map from "./components/Map"
+import Sidebar from "./components/Sidebar"
+>>>>>>> map-interactivity-with-charts
 
 
 // order 
@@ -23,6 +29,7 @@ import { Controller } from "@deck.gl/core"
 console.log(Controller)
 
 
+<<<<<<< HEAD
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoidnBldHNldjk2IiwiYSI6ImNrYnRzMTBxejAwZnYycXA3bzZ0OXFpdHUifQ.Dv0v0YoPuv-SNDoHUVoMmw";
 
@@ -158,9 +165,19 @@ class App extends Component {
           highlight={type => this._onHighlight(type)}
           select={type => this._onSelect(type)}
         />
+=======
+// button to manage hexagon and scatter controls
+
+// Color the processed data into fractions in the processing file and use that, instead of the arrays of data
+
+function App() {
+    return (
+      <div>
+        <Map />
+        <Sidebar />
+>>>>>>> map-interactivity-with-charts
       </div>
     );
   }
-}
 
 export default App;

@@ -10,7 +10,7 @@ export const HEXAGON_CONTROLS = {
   radius: {
     displayName: "Hexagon Radius",
     type: "range",
-    value: 250,
+    value: 1000,
     step: 50,
     min: 50,
     max: 1000,
@@ -31,17 +31,12 @@ export const HEXAGON_CONTROLS = {
     min: 80,
     max: 100,
   },
-  showScatterplot: {
-    displayName: "Show Scatterplot",
-    type: "boolean",
-    value: true,
-  },
   radiusScale: {
     displayName: "Scatterplot Radius",
     type: "range",
     value: 30,
     step: 10,
-    min: 10,
+    min: 50,
     max: 200,
   },
 };
@@ -110,7 +105,7 @@ export class LayerControls extends Component {
   _onValueChange(settingName, newValue) {
     const { settings } = this.props;
     // Only update if we have a confirmed change
-    if (settings[settingName] !== newValue) {
+    if (settings[settingName] != newValue) {
       // Create a new object so that shallow-equal detects a change
       const newSettings = {
         ...this.props.settings,
@@ -145,6 +140,13 @@ export class LayerControls extends Component {
     );
   }
 }
+
+// export const LayerControls = () => {
+//   _onValueChange(settingName, newValue) {
+
+//   }
+
+// }
 
 const Setting = (props) => {
   const { propType } = props;

@@ -23,52 +23,28 @@ export const chartsStyle = {
 
 export default function Charts(props) {
   return (
-    <div
-      style={chartsStyle}
-      // onMouseLeave={() => highlight(null)}
-    >
-      <h2>Types of wells</h2>
-      <p> As percentage of all wells</p>
+    <div style={chartsStyle}>
       <RadialChart
+        style={{ stroke: "#fff", strokeWidth: 2, cursor: "pointer" }}
         colorType={"literal"}
+        colorDomain={[0, 100]}
+        colorRange={[0, 10]}
+        margin={{ top: 100 }}
         getLabel={(d) => d.name}
         data={[
-          {
-            angle: percentages[0].percentage,
-            color: percentages[0].color,
-            name: percentages[0].type
-          },
-          {
-            angle: percentages[1].percentage,
-            color: percentages[1].color,
-            name: percentages[1].type
-          },
-          {
-            angle: percentages[2].percentage,
-            color: percentages[2].color,
-            name: percentages[2].type
-          },
-          {
-            angle: percentages[3].percentage,
-            color: percentages[3].color,
-            name: percentages[3].type
-          },
-          {
-            angle: percentages[4].percentage,
-            color: percentages[4].color,
-            name: percentages[4].type
-          }
+          { angle: percentages[0], color: "#89DAC1", name: "green" },
+          { angle: percentages[1], color: "#F6D18A", name: "yellow" },
+          { angle: percentages[2], color: "#1E96BE", name: "cyan" },
+          { angle: percentages[3], color: "#DA70BF", name: "magenta" },
+          { angle: percentages[4], color: "#F6D18A", name: "yellow again" },
         ]}
         labelsRadiusMultiplier={1.1}
         labelsStyle={{ fontSize: 16, fill: "#222" }}
         showLabels
-        style={{ stroke: "#fff", strokeWidth: 2, cursor: "pointer" }}
-        width={200}
+        style={{ stroke: "#fff", strokeWidth: 2 }}
+        width={150}
         height={150}
-        // onValueMouseOver={d => highlight(d)}
       />
     </div>
   );
 }
-
-// Use saved data from the arrays
