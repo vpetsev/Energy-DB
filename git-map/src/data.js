@@ -81,12 +81,15 @@ let oilAndGasWellsArr = [];
 let inactiveWellsArr = [];
 let miscWellsArr = [];
 
-export let wellCategoriesArr = [
+export let wellCategoriesArr = [{
   oilWellsArr,
+
   gasWellsArr,
   oilAndGasWellsArr,
   inactiveWellsArr,
   miscWellsArr,
+
+}
 ];
 
 export const wells = wellsData.map((obj) => {
@@ -145,13 +148,13 @@ export const wells = wellsData.map((obj) => {
       wellType = symbDesc;
       miscWellsArr.push(obj);
       // purple
-      color = [33, 255, 248]
+      color = [0,0,255]
   } else if (inactiveWells.includes(symbDesc)) {
       wellCategory = "inactive"
       wellType = symbDesc;
       inactiveWellsArr.push(obj);
       //grey
-      color = [0, 255, 255]
+      color = [0,0,0]
   } else {
     return symbDesc;
   }
@@ -212,13 +215,30 @@ wellCategoriesArr.forEach((category) => {
   getPercentage(category);
 });
 
-export let categoryLength = [
-  oilWellsArr.length,
-  gasWellsArr.length,
-  oilAndGasWellsArr.length,
-  inactiveWellsArr.length,
-  miscWellsArr.length,
-];
+export let categoryLength = 
+  {
+    oil: {
+      name: "oil",
+      length: oilWellsArr.length
+    },
+    gas: {
+      name: "gas",
+      length: gasWellsArr.length
+    },
+    oilAndGas: {
+      name: "oilAndGas",
+      length: oilAndGasWellsArr.length
+    },
+    inactive: {
+      name: "inactive",
+      length: inactiveWellsArr.length
+    },
+    misc: {
+      name: "misc",
+      length: miscWellsArr.length
+    }
+  }
+;
 
 // let descriptionArr = data.map(point => point.GIS_SYMBOL_DESCRIPTION)
 

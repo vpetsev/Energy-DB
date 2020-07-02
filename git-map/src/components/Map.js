@@ -14,7 +14,8 @@ import { wells, wellsData } from "../data";
 import { viewStates as initialViewStates, categories } from "../config";
 
 import {scatterLayer} from "./layers/Scatterplot";
-import {hexLayer} from "./layers/Hexagon"
+import { hexLayer } from "./layers/Hexagon"
+
 
 // Can move viewstate to state
 
@@ -39,19 +40,21 @@ const Map = () => {
 
 
     return (
-            <DeckGL
-                layers={scatterLayer({
-                    data: wells,
-                })}
-                initialViewState={viewStates}
-                controller={true}
-            >
-                <StaticMap
-                    mapStyle={style}
-                    mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
-                />
-            </DeckGL>
-    )
+      <div className="map-container">
+        <DeckGL
+          layers={scatterLayer({
+            data: wells,
+          })}
+          initialViewState={viewStates}
+          controller={true}
+        >
+          <StaticMap
+            mapStyle={style}
+            mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
+          />
+        </DeckGL>
+      </div>
+    );
 }
 
 const mapStateToProps = (state) => filterState(state);

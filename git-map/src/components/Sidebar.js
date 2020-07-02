@@ -31,7 +31,7 @@ const Sidebar = ({
 }) => {
       return (
         <div className="sidebar">
-            <h1>Oil and Gas Database</h1>
+              <h1 >Oil and Gas DB</h1>
             <>
                 <p style={{ marginBottom: 15}}>
                 A visualization of wells in and around Houston. Made by Victor Petsev.
@@ -77,12 +77,12 @@ const Sidebar = ({
                         }
                     />
                     <p>
-                        {activeLayer === "hexbins" && 
-                            "Hexbins - aggregate wells in a specific radius"
-                        }
                         {activeLayer === "scatter" &&
                             "Scatter - plots each individual well by type"
-                        }
+                          }
+                          <br />
+                      
+                        Hexbins - aggregate wells in a specific radius
                     </p>
                  </Section>
             </>
