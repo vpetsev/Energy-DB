@@ -24,7 +24,7 @@ import { hexLayer } from "./layers/Hexagon"
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoidnBldHNldjk2IiwiYSI6ImNrYnRzMTBxejAwZnYycXA3bzZ0OXFpdHUifQ.Dv0v0YoPuv-SNDoHUVoMmw";
 
-export const viewStates =
+export const initialViewState =
 {
     longitude: -95.773046,
     latitude: 30.049046,
@@ -43,13 +43,19 @@ const Map = ({activeLayer, data, categories }) => {
     ...categories.map(x => x.active)
   ])
 
+  const layers = [
+    activeLayer === "scatter"
+      ? scatterLayer({data: wellData})
+      : activeLayer === "hexbins"
+        ? hexLayer({ data: wellData })
+        : null
+  ]
+
     return (
       <div className="map-container">
         <DeckGL
-          layers={scatterLayer({
-            data: wells,
-          })}
-          initialViewState={viewStates}
+          layers={layers}
+          initialViewState={initialViewState}
           controller={true}
         >
           <StaticMap
