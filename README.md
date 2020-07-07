@@ -21,41 +21,10 @@ INTRODUCTION
     DEMO SITE: http://energy-db.surge.sh/
 
 
-DIRECTORY LAYOUT
-----------------
-
-.
-└── client
-    ├── public
-    │   ├── index.html                      
-    │   └── ...
-    └── src
-        ├── App.js                          # Container for Map and Sidebar components
-        ├── Charts.js                       # *Charts implementation
-        ├── Controls.js                     # *Map Controls
-        ├── Style.js                        # JS Styles for some components and layers
-        ├── components                  
-        │   ├── Map.js                      # Loads MapBox map and Deck.gl - Memoizes data points
-        │   ├── Selector.js                 # Sidebar selection logic - easily scalable for additional options
-        │   ├── Sidebar.js                  # Sidebar JSX
-        │   ├── controls
-        │   │   └── CategoriesList.js       # Manages color coding for different well types
-        │   ├── filter.js                   # *Filters layers by options
-        │   └── layers
-        │       ├── Hexagon.js              # Hexagon map layer
-        │       └── Scatterplot.js          # Scatterplot map layer
-        ├── config.js                       # Categories and view states config
-        ├── data-houston.json               # Well data in Houston (~100k points)
-        ├── data.js                         # Picks random subsection of Houston Data (~2500) and filters
-        ├── index.js                        # Redux initialization and component container
-        └── ... (css)
-
-
-
 INSTALLATION 
 ------------
 
-    Visit the demo site at [Energy-db.surge.sh].
+    Visit the demo site at Energy-db.surge.sh
 
     or run:
     git clone 
