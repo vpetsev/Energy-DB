@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
 
   if (type === "SET_ACTIVE") {
       const { key, value } = payload;
-      if (key === 'metric') {
+      if (key === 'wells') {
          stateCopy.activeMetric = value;
       } else if (key === 'layer') {
          stateCopy.activeLayer = value;
@@ -42,7 +42,6 @@ const reducer = (state = initialState, action) => {
       }
    } else if (type === 'SET_CATEGORY') {
       const categories = [...stateCopy.categories];
-        console.log(categories)
         categories.forEach((category) => {
          if (category.name === payload) {
             category.active = !category.active;

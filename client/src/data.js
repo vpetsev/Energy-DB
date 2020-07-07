@@ -198,7 +198,7 @@ export const wells = wellsData.map((obj) => {
   return wellObj;
 });
 
-let dataLength = data.length;
+export let dataLength = wells.length;
 
 let oilWellsArrLength = oilWellsArr.length;
 let gasWellsArrLength = gasWellsArr.length;

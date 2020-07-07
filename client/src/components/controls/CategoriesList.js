@@ -1,18 +1,17 @@
 import React from "react";
-import { categoryLength } from "../../data"
+import { categoryLength, dataLength } from "../../data"
 // icons
 
 
 const units = {
     wells: "wells",
-    percentage: "percent"
+    percentage: "%"
 }
 
 // Function to add commas
 
-export const CategoryList = ({ data, categories, handleClick, activeMetric }) => {
+export const CategoryList = ({ categories, handleClick, activeMetric }) => {
     return categories.map((category, i) => {
-        console.log(category)
         let typeOfWell = category.name
         let value = categoryLength[typeOfWell].length
 
@@ -25,23 +24,27 @@ export const CategoryList = ({ data, categories, handleClick, activeMetric }) =>
 
         let format = "";
         if (activeMetric === "wells") {
-            format = `${value}`
-        } 
+            format = `${value} wells`
+        } else if (activeMetric === "percentages") {
+            value = ((value / dataLength) * 100).toFixed(2)
+            format = `${value}%`
+        }
 
         return (
             <div
                 key={i}
                 className="category noselect"
+                onClick={() => handleClick(category.name)}
             >
                 <div style={style}  />
                 <span
-                    style={{ color: category.color }}
+                    style={{ backgroundColor: category.color + " !important" }}
                     className="title"
                 >
                     {category.name.charAt(0).toUpperCase() +
                         category.name.substring(1) + ":"}
                 </span>
-                {<span className="sub">{format + " Wells"}</span>}
+                {<span className="sub">{format}</span>}
                 <span className="legendColor" style={{ marginLeft: "30px", backgroundColor: `${category.hexColor}`}}>{`${category.hexColor}`}</span>
             </div>
         )

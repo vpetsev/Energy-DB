@@ -35,9 +35,13 @@ export const viewStates =
     bearing: 0,
 }
 
-const Map = () => {
-    let style = "mapbox://styles/mapbox/dark-v9";
 
+const Map = ({activeLayer, data, categories }) => {
+  let style = "mapbox://styles/mapbox/dark-v9";
+  
+  const wellData = useMemo(() => wells, [
+    ...categories.map(x => x.active)
+  ])
 
     return (
       <div className="map-container">

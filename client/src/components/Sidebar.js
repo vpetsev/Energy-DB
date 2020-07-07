@@ -39,12 +39,12 @@ const Sidebar = ({
                 <Section>
                     <h2>Well Analytics</h2>
                     <Selector
-                        category="metric"
-                        options={["Wells", "Percentages"]}
+                        type="wells"
+                        options={["wells", "percentages"]}
                         active={activeMetric}
                         changeActive={(key, value) => 
                             dispatch({
-                                category: "SET_ACTIVE",
+                                type: "SET_ACTIVE",
                                 payload: { key, value },
                             })
                         }
@@ -52,11 +52,10 @@ const Sidebar = ({
                     <CategoryList // Same as ProviderList
                         handleClick={(category) => 
                             dispatch({
-                                category: "SET_CATEGORY",
+                                type: "SET_CATEGORY",
                                 payload: category,
                             })
                         }
-                        types={types}
                         data={data}
                         activeMetric={activeMetric}
                         categories={categories}
@@ -66,12 +65,12 @@ const Sidebar = ({
                 <Section>
                     <h2>Toggle Layer category</h2>
                     <Selector
-                        category="layer"
+                        type="layer"
                         options={["hexbins", "scatter"]} // Heatmap maybe later
                         active={activeLayer}
                         changeActive={(key, value) => 
                             dispatch({
-                                category: "SET_ACTIVE",
+                                type: "SET_ACTIVE",
                                 payload: { key, value }
                             })
                         }

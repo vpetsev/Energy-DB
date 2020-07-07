@@ -9,6 +9,7 @@ class Selector extends React.Component {
       const grid = {
          gridTemplateColumns: ` repeat(${this.props.options.length}, 1fr)`,
       };
+      console.log(this.props.options.length)
 
       return (
          <div style={grid} className="selector-outside">
