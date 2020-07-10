@@ -13,9 +13,9 @@ CONTENTS OF THIS FILE
 
 INTRODUCTION
 ------------
-    Energy DB is an interactive map and visualization tool for oil wells in and around Houston. Such information is publicly available ([rrc.state.tx.us][1]) but difficult to locate and time-consuming to compile and/or search. The purpose of this application is to make the data easier to parse and visualize in an appealing way.
+Energy DB is an interactive map and visualization tool for oil wells in and around Houston. Such information is publicly available ([rrc.state.tx.us][1]) but difficult to locate and time-consuming to compile and/or search. The purpose of this application is to make the data easier to parse and visualize in an appealing way.
 
-    Built entirely on the client-side in ReactJS with Uber's Vis.gl suite, D3, and redux. 
+Built entirely on the client-side in ReactJS with Uber's Vis.gl suite, D3, and redux. 
 
 
     DEMO SITE: http://energy-db.surge.sh/
@@ -24,10 +24,16 @@ INTRODUCTION
 INSTALLATION 
 ------------
 
-    Visit the demo site at Energy-db.surge.sh
+Visit the demo site at:
 
-    or run:
-    git clone 
+Energy-db.surge.sh
+
+or run in the command line:
+
+git clone git@github.com:VPetsev/Energy-DB.git
+cd client
+npm install
+npm start
 
 
 
