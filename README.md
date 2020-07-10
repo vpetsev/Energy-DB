@@ -1,30 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CONTENTS OF THIS FILE
+---------------------
 
-## Available Scripts
+ * Introduction
+ * Directory Layout
+ * Installation
+ * Configuration
+ * Troubleshooting
+ * FAQ
+ * Maintainers
 
-In the project directory, you can run:
+---------------------
 
-### `npm start`
+INTRODUCTION
+------------
+    Energy DB is an interactive map and visualization tool for oil wells in and around Houston. Such information is publicly available ([rrc.state.tx.us][1]) but difficult to locate and time-consuming to compile and/or search. The purpose of this application is to make the data easier to parse and visualize in an appealing way.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    Built entirely on the client-side in ReactJS with Uber's Vis.gl suite, D3, and redux. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+    DEMO SITE: http://energy-db.surge.sh/
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+INSTALLATION 
+------------
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    Visit the demo site at Energy-db.surge.sh
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    or run:
+    git clone 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+
+[1]: https://www.rrc.state.tx.us/oil-gas/research-and-statistics/obtaining-commission-records/oil-and-gas-well-records/np 
