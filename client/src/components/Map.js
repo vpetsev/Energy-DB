@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { connect } from 'react-redux'
 import filterState from "./filter"
 import DeckGL from "@deck.gl/react";
-import { StaticMap } from "react-map-gl";
+import { Map } from "react-map-gl";
 import {
     SCATTERPLOT_CONTROLS,
     HEXAGON_CONTROLS,
@@ -36,7 +36,7 @@ export const initialViewState =
 }
 
 
-const Map = ({activeLayer, data, categories }) => {
+const MapConst = ({activeLayer, data, categories }) => {
   let style = "mapbox://styles/mapbox/dark-v9";
   
   const wellData = useMemo(() => wells, [
@@ -58,7 +58,7 @@ const Map = ({activeLayer, data, categories }) => {
           initialViewState={initialViewState}
           controller={true}
         >
-          <StaticMap
+          <Map
             mapStyle={style}
             mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
           />
@@ -69,4 +69,4 @@ const Map = ({activeLayer, data, categories }) => {
 
 const mapStateToProps = (state) => filterState(state);
 const mapDispatchToProps = (dispatch) => ({ dispatch });
-export default connect(mapStateToProps, mapDispatchToProps)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(MapConst);
