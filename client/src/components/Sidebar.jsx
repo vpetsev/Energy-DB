@@ -4,7 +4,7 @@ import Selector from "./Selector";
 import { connect } from "react-redux";
 import { CategoryList} from "./controls/CategoriesList";
 import filterState from "./filter"
-import { categories } from "../config"
+
 
 
 
@@ -27,7 +27,8 @@ const Sidebar = ({
     activeMetric,
     activeLayer,
     activeView,
-    types
+    types,
+    categories
 }) => {
       return (
         <div className="sidebar">

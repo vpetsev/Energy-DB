@@ -68,3 +68,8 @@
 .title {
    margin-left: 10px;
 }
+.category { cursor: pointer; position: relative; padding: 10px 0; margin: 5px 0; }
+.category > div { position: absolute; height: 3px; bottom: 0; opacity: .6; }
+.category[aria-pressed="false"] { opacity: .45; }
+.legendColor { font-size: 10px; padding: 2px; color: #fff; }
+.map-container { position: absolute; left: 0; top: 0; right: 0; bottom: 0; }

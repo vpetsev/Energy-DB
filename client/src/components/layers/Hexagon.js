@@ -22,9 +22,10 @@ export function hexLayer(props) {
   return [
     new HexagonLayer({
       id: "hexagon-layer",
+      radius: 1000,
       colorRange: HEATMAP_COLORS,
       elevationRange,
-      elevationScale: 500,
+      elevationScale: 1,
       extruded: true,
       getPosition: (d) => [d.coords[0], d.coords[1], 0],
       opacity: 0.8,

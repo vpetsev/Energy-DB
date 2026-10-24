@@ -21,7 +21,7 @@ const initialState = {
       (accu, key) => ({
         ...accu,
         [key]: SCATTERPLOT_CONTROLS[key].value,
-      })),
+      }), {}),
   categories: categories,
   activeLayer: 'scatter',
   activeMetric: 'wells',
@@ -41,13 +41,7 @@ const reducer = (state = initialState, action) => {
          stateCopy.activeView = value;
       }
    } else if (type === 'SET_CATEGORY') {
-      const categories = [...stateCopy.categories];
-        categories.forEach((category) => {
-         if (category.name === payload) {
-            category.active = !category.active;
-         }
-      });
-      stateCopy.categories = categories;
+      stateCopy.categories = state.categories.map(category => category.name === payload ? {...category, active: !category.active} : category);
   }
   return stateCopy;
 }

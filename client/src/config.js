@@ -22,17 +22,17 @@ export const categories = [
     },
     {
         name: "misc",
-        color: [33, 255, 248],
+        color: [0, 0, 255],
         hexColor: "#0000FF",
         modes: ['misc'],
         active: true
     },
     {
         name: "inactive",
-        color: [0, 255, 255],
+        color: [191, 193, 194],
         modes: ['inactive'],
         active: true,
-        hexColor: "#000000"
+        hexColor: "#BFC1C2"
     }
 ]
 

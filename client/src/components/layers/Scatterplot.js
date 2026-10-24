@@ -1,4 +1,4 @@
-import { ScatterplotLayer } from 'deck.gl';
+import { ScatterplotLayer } from '@deck.gl/layers';
 
 export function scatterLayer(props) {
     const {
@@ -6,14 +6,14 @@ export function scatterLayer(props) {
         onHover,
         settings
     } = props
-    
-    console.log(data)
-  
+
+
+
     return [
       new ScatterplotLayer({
         id: "scatter-plot",
         getPosition: (d) => [d.coords[0], d.coords[1], 0],
-        getColor: (d) => d.color.rgb,
+        getFillColor: (d) => d.color,
         getRadius: (d) => 3,
         opacity: 0.8,
         radiusMinPixels: 2,

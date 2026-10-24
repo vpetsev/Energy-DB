@@ -1,3 +1,5 @@
+Local setup restored October 24, 2026. See [RUNNING.md](RUNNING.md) for the current launcher and Node 22 instructions. The original project description follows.
+
 CONTENTS OF THIS FILE
 ---------------------
 

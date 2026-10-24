@@ -15,10 +15,10 @@ export const CategoryList = ({ categories, handleClick, activeMetric }) => {
         let typeOfWell = category.name
         let value = categoryLength[typeOfWell].length
 
-        let max = 0;
+        let max = Math.max(...Object.values(categoryLength).map(c => c.length));
 
     const style = {
-         background: category.active ? category.color : '#000000',
+         background: category.active ? category.hexColor : '#000000',
          width: category.active ? (value / max) * 100 + '%' : '0%',
       };
 
@@ -34,11 +34,13 @@ export const CategoryList = ({ categories, handleClick, activeMetric }) => {
             <div
                 key={i}
                 className="category noselect"
+                role="button" tabIndex={0} aria-pressed={category.active}
+                onKeyDown={e => { if(e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(category.name); } }}
                 onClick={() => handleClick(category.name)}
             >
                 <div style={style}  />
                 <span
-                    style={{ backgroundColor: category.color + " !important" }}
+                    style={{ backgroundColor: category.hexColor }}
                     className="title"
                 >
                     {category.name.charAt(0).toUpperCase() +

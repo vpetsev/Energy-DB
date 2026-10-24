@@ -4,7 +4,7 @@ function filter(data, { categories }) {
   const output = [];
   for (let i = 0; i < categories.length; i++) {
     if (categories[i].active) {
-      output.push(...data.filter((d) => d.wellType === categories[i].name));
+      output.push(...data.filter((d) => d.attributes.wellCategory === categories[i].name));
     }
   }
   return output;

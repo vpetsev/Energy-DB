@@ -1,4 +1,4 @@
-let data = require("./data-houston.json");
+import data from "./data-houston.json";
 
 function getRandom(arr, n) {
     var result = new Array(n),
@@ -14,6 +14,7 @@ function getRandom(arr, n) {
     return result;
 }
 
+// Match the deployed app: sample across the complete dataset, not its ordered prefix.
 export let wellsData = getRandom(data, 2500);
 
 
@@ -161,7 +162,7 @@ export const wells = wellsData.map((obj) => {
     color = [191, 193, 194]
     hexColor= "#BFC1C2"
   } else {
-    return symbDesc;
+    return null;
   }
 
   let wellObj = {
@@ -196,7 +197,7 @@ export const wells = wellsData.map((obj) => {
   };
 
   return wellObj;
-});
+}).filter(Boolean);
 
 export let dataLength = wells.length;
 
@@ -214,7 +215,7 @@ const getPercentage = (arr) => {
   return percentage;
 };
 
-console.log(wellCategoriesArr)
+
 
 
 wellCategoriesArr.forEach((category) => {
